@@ -13,14 +13,16 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            # - name: Setup LaTeX
-            #   uses: dante-ev/action-texlive@v2
+            - name: Cache APT packages
+              uses: actions/cache@v2
+              with:
+                  path: /var/cache/apt/archives
+                  key: ${{ runner.os }}-apt-${{ hashFiles('**/packages-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-apt-
 
-            - name: Install pdflatex
-              run: sudo apt-get install texlive-latex-base
-
-            - name: Install pandoc
-              run: sudo apt-get install -y pandoc
+            - name: Install neccessary tools.
+              run: apt-get install pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils texlive-latex-extra
 
             - name: Convert Markdown to PDF
               run: pandoc my-resume.md -o my-resume.pdf
@@ -38,6 +40,3 @@ jobs:
 
             - name: Move PDF to main directory
               run: mv ${{ github.workspace }}/my-resume.pdf ${{ github.workspace }}/../my-resume.pdf
-
-            - name: Print PDF directory to a file
-              run: echo ${{ github.workspace }}/../my-resume.pdf > path.txt
