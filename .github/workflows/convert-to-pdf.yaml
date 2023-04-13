@@ -38,5 +38,5 @@ jobs:
               with:
                   name: my-resume-pdf
 
-            - name: Move PDF to main directory
-              run: mv ${{ github.workspace }}/my-resume.pdf ${{ github.workspace }}/../my-resume.pdf
+            - name: Move PDF to output folder
+              run: mv ${{ github.workspace }}/my-resume.pdf ${{ github.workspace }}/../output/my-resume.pdf
