@@ -17,7 +17,7 @@ jobs:
             #   uses: dante-ev/action-texlive@v2
 
             - name: Install pdflatex
-              run: sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra
+              run: sudo apt-get install texlive-latex-base
 
             - name: Install pandoc
               run: sudo apt-get install -y pandoc
@@ -38,3 +38,6 @@ jobs:
 
             - name: Move PDF to main directory
               run: mv ${{ github.workspace }}/my-resume.pdf ${{ github.workspace }}/../my-resume.pdf
+
+            - name: Print PDF directory to a file
+              run: echo ${{ github.workspace }}/../my-resume.pdf > path.txt
