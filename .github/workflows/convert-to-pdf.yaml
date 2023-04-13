@@ -24,3 +24,17 @@ jobs:
 
             - name: Convert Markdown to PDF
               run: pandoc my-resume.md -o my-resume.pdf
+
+            - name: Upload PDF artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: my-resume-pdf
+                  path: my-resume.pdf
+
+            - name: Download PDF artifact
+              uses: actions/download-artifact@v2
+              with:
+                  name: my-resume-pdf
+
+            - name: Move PDF to main directory
+              run: mv ${{ github.workspace }}/my-resume.pdf ${{ github.workspace }}/../my-resume.pdf
