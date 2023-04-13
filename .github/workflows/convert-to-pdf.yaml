@@ -22,7 +22,7 @@ jobs:
                       ${{ runner.os }}-apt-
 
             - name: Install neccessary tools.
-              run: apt-get install pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils texlive-latex-extra
+              run: sudo apt-get install pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils texlive-latex-extra
 
             - name: Convert Markdown to PDF
               run: pandoc my-resume.md -o my-resume.pdf
